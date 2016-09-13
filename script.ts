@@ -3,6 +3,7 @@ var NORMAL: any = { nmbCard: 10, frtColor: "orange"};
 var HARD: any = { nmbCard: 14, frtColor: "red"};
 var HARDER: any = { nmbCard: 20, frtColor: "black"};
 var party: any;
+var cardPlayed:Array<Card> = [];
 
 class Card{
     constructor(public id: number, public value: boolean, public color: string, public htmlele: HTMLElement){
@@ -38,7 +39,7 @@ class Game{
 }
 
 
-function generateCard(difficulty: Object){
+function generateGame(difficulty: Object){
       switch(difficulty){
         case EASY:
           party = new Game(EASY);
@@ -87,12 +88,20 @@ function createCard(color:string,id:number){
   }
 
 function play(event:any){
-    var element  = event.target;
+    var element = event.target;
     var id = element.id;
     var objet = party.listOfCard[id];
+
+    objet.value = true;
+    objet.htmlele.removeEventListener
+    cardPlayed.push(objet);
+
     element.style.backgroundColor = objet.color;
 }
 
+function timeout(){
+
+}
 
 function rand(a:number){
     return Math.floor(Math.random()*a);
