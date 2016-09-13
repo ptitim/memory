@@ -1,0 +1,22 @@
+$cardHeight: 20vmax;
+$carWidth: $cardHeight /1.3;
+
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.plateau{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card{
+    height: $cardHeight;
+    width: $carWidth;
+    // background-color: grey;
+    border: 2px inset grey;
+    margin: 2vmin;
+}

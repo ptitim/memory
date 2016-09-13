@@ -1,0 +1,16 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; }
+
+.plateau {
+  display: flex;
+  flex-wrap: wrap; }
+
+.card {
+  height: 20vmax;
+  width: 15.38462vmax;
+  border: 2px inset grey;
+  margin: 2vmin; }
+
+/*# sourceMappingURL=style.css.map */
