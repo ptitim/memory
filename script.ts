@@ -89,7 +89,6 @@ function generateColor(numberOfCard: number){
   //     returnTab.push(str.join(''));
   //     returnTab.push(str.join(''));
   // }
-// bonjouit
   // test generation avec image
   var returnTab:Array<string> = [];
   for(var i = 0; i < numberOfCard/2; i++){
@@ -128,8 +127,8 @@ function play(event:any){
       objet.value = true;
       objet.htmlele.removeEventListener("click", play);
       cardPlayed.push(objet);
-      imgEle.style.opacity = "1";
-      // element.style.backgroundColor = objet.color;
+      imgEle.style.opacity = "0.6";
+      element.style.backgroundColor = objet.color;
 
       if(cardPlayed.length == 1)
         test =  setTimeout(timeout , TIMEOFCLICK);
@@ -151,7 +150,7 @@ function timeout(){
                     for(var i = 0 ; i < tmp.length; i++){
                         var test:any = tmp[i].htmlele.childNodes[0];
                         test.style.opacity = "0";
-                        // tmp[i].htmlele.style.backgroundColor = party.difficulty.frtColor;//retournement de la carte
+                        tmp[i].htmlele.style.backgroundColor = party.difficulty.frtColor;//retournement de la carte
                     }
                   }, 500);
     }
