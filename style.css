@@ -7,10 +7,16 @@
   display: flex;
   flex-wrap: wrap; }
 
-.card {
-  height: 20vmax;
-  width: 15.38462vmax;
+.card, .easyCard, .hardCard {
   border: 2px inset grey;
   margin: 2vmin; }
+
+.easyCard {
+  height: 20vmax;
+  width: 16.66667vmax; }
+
+.hardCard {
+  height: 13.33333vmax;
+  width: 11.11111vmax; }
 
 /*# sourceMappingURL=style.css.map */

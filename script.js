@@ -1,8 +1,11 @@
-var EASY = { nmbCard: 6, frtColor: "blue" };
-var NORMAL = { nmbCard: 10, frtColor: "orange" };
-var HARD = { nmbCard: 14, frtColor: "red" };
-var HARDER = { nmbCard: 20, frtColor: "black" };
+var EASY = { nmbCard: 6, frtColor: "blue", dif: "easy" };
+var NORMAL = { nmbCard: 10, frtColor: "orange", dif: "normal" };
+var HARD = { nmbCard: 14, frtColor: "red", dif: "hard" };
+var HARDER = { nmbCard: 20, frtColor: "black", dif: "harder" };
 var party;
+var cardPlayed = [];
+var test;
+var TIMEOFCLICK = 4000; //temps pour retourner la deuximee carte
 var Card = (function () {
     function Card(id, value, color, htmlele) {
         this.id = id;
@@ -29,14 +32,14 @@ var Game = (function () {
             var index = rand(tabColor.length); //index of card color
             var color = tabColor[index]; //save if the card color
             tabColor.splice(index, 1); //delete of the used color
-            var temp = new Card(i, false, color, createCard(difficulty.frtColor, i)); //creation of a card
+            var temp = new Card(i, false, color, createCard(difficulty.frtColor, i, difficulty.dif)); //creation of a card
             this.listOfCard.push(temp); //add the card to the Array
             plateau.appendChild(this.listOfCard[i].htmlele); //adding the card in the html
         }
     }
     return Game;
 }());
-function generateCard(difficulty) {
+function generateGame(difficulty) {
     switch (difficulty) {
         case EASY:
             party = new Game(EASY);
@@ -54,6 +57,8 @@ function generateCard(difficulty) {
             console.log("Error, incorrect input of difficulty (function generateCard)");
             break;
     }
+    var choix = document.getElementsByClassName('choixdif')[0];
+    choix.style.display = 'none';
     console.log("party : ", party);
 }
 function generateColor(numberOfCard) {
@@ -61,7 +66,6 @@ function generateColor(numberOfCard) {
     var numberOfColor = numberOfCard / 2;
     var returnTab = [];
     for (var i = 0; i < numberOfColor; i++) {
-        console.log(i);
         var str = [];
         str.push('#');
         for (var j = 0; j < 6; j++) {
@@ -72,20 +76,62 @@ function generateColor(numberOfCard) {
     }
     return returnTab;
 }
-function createCard(color, id) {
+function createCard(color, id, dif) {
     var div = document.createElement('div');
-    div.className += "card";
+    if (dif == EASY.dif || dif == NORMAL.dif) {
+        div.className += "easyCard";
+    }
+    else {
+        div.className += "hardCard";
+    }
     div.addEventListener("click", play);
     div.style.backgroundColor = color;
     div.id = id.toString();
     return div;
 }
 function play(event) {
-    var element = event.target;
-    var id = element.id;
-    var objet = party.listOfCard[id];
-    element.style.backgroundColor = objet.color;
+    if (cardPlayed.length < 2) {
+        var element = event.target;
+        var id = element.id;
+        var objet = party.listOfCard[id];
+        objet.value = true;
+        objet.htmlele.removeEventListener("click", play);
+        cardPlayed.push(objet);
+        element.style.backgroundColor = objet.color;
+        if (cardPlayed.length == 1)
+            test = setTimeout(timeout, TIMEOFCLICK);
+    }
+    if (cardPlayed.length == 2) {
+        verifCard();
+        return;
+    }
+    return console.log("erreur play cardPLay.length offerflow");
 }
+function timeout() {
+    for (var i = 0; i < cardPlayed.length; i++) {
+        cardPlayed[i].htmlele.addEventListener("click", play);
+        cardPlayed[i].value = false;
+        var tmp = cardPlayed;
+        setTimeout(function () {
+            for (var i = 0; i < tmp.length; i++) {
+                tmp[i].htmlele.style.backgroundColor = party.difficulty.frtColor; //retournement de la carte
+            }
+        }, 500);
+    }
+    cardPlayed = [];
+}
+function verifCard() {
+    console.log("verification en cours");
+    if (cardPlayed[0].color === cardPlayed[1].color) {
+        clearTimeout(test);
+        cardPlayed = [];
+    }
+    else {
+        clearTimeout(test);
+        timeout();
+    }
+}
+//usefull function
 function rand(a) {
     return Math.floor(Math.random() * a);
 }
