@@ -5,6 +5,16 @@ var HARDER = { nmbCard: 20, frtColor: "black", dif: "harder" };
 var party;
 var cardPlayed = [];
 var test;
+var tabMotif = ["data/1.png",
+    "data/2.png",
+    "data/3.png",
+    "data/4.png",
+    "data/5.png",
+    "data/6.png",
+    "data/7.png",
+    "data/8.png",
+    "data/9.png",
+    "data/10.png"];
 var TIMEOFCLICK = 4000; //temps pour retourner la deuximee carte
 var Card = (function () {
     function Card(id, value, color, htmlele) {
@@ -32,7 +42,7 @@ var Game = (function () {
             var index = rand(tabColor.length); //index of card color
             var color = tabColor[index]; //save if the card color
             tabColor.splice(index, 1); //delete of the used color
-            var temp = new Card(i, false, color, createCard(difficulty.frtColor, i, difficulty.dif)); //creation of a card
+            var temp = new Card(i, false, color, createCard(difficulty.frtColor, color, i, difficulty.dif)); //creation of a card
             this.listOfCard.push(temp); //add the card to the Array
             plateau.appendChild(this.listOfCard[i].htmlele); //adding the card in the html
         }
@@ -62,28 +72,41 @@ function generateGame(difficulty) {
     console.log("party : ", party);
 }
 function generateColor(numberOfCard) {
-    var tab = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'];
-    var numberOfColor = numberOfCard / 2;
+    // var tab = ['0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'];
+    // var numberOfColor = numberOfCard/2;
+    // var returnTab:Array<string> = [];
+    //
+    // for(var i = 0 ; i < numberOfColor; i++){
+    //     var str:Array<any> = [];
+    //     str.push('#');
+    //     for(var j = 0; j < 6; j++){
+    //         str.push(tab[rand(tab.length)]);
+    //     }
+    //     returnTab.push(str.join(''));
+    //     returnTab.push(str.join(''));
+    // }
+    // bonjouit
+    // test generation avec image
     var returnTab = [];
-    for (var i = 0; i < numberOfColor; i++) {
-        var str = [];
-        str.push('#');
-        for (var j = 0; j < 6; j++) {
-            str.push(tab[rand(tab.length)]);
-        }
-        returnTab.push(str.join(''));
-        returnTab.push(str.join(''));
+    for (var i = 0; i < numberOfCard / 2; i++) {
+        var tmp = tabMotif[rand(tabMotif.length)];
+        returnTab.push(tmp);
+        returnTab.push(tmp);
     }
     return returnTab;
 }
-function createCard(color, id, dif) {
+function createCard(color, image, id, dif) {
     var div = document.createElement('div');
+    var img = document.createElement('img');
+    img.src = image;
+    img.style.opacity = "0";
     if (dif == EASY.dif || dif == NORMAL.dif) {
         div.className += "easyCard";
     }
     else {
         div.className += "hardCard";
     }
+    div.appendChild(img);
     div.addEventListener("click", play);
     div.style.backgroundColor = color;
     div.id = id.toString();
@@ -92,12 +115,15 @@ function createCard(color, id, dif) {
 function play(event) {
     if (cardPlayed.length < 2) {
         var element = event.target;
+        var imgEle = element.childNodes[0];
+        console.log(imgEle);
         var id = element.id;
         var objet = party.listOfCard[id];
         objet.value = true;
         objet.htmlele.removeEventListener("click", play);
         cardPlayed.push(objet);
-        element.style.backgroundColor = objet.color;
+        imgEle.style.opacity = "1";
+        // element.style.backgroundColor = objet.color;
         if (cardPlayed.length == 1)
             test = setTimeout(timeout, TIMEOFCLICK);
     }
@@ -114,7 +140,8 @@ function timeout() {
         var tmp = cardPlayed;
         setTimeout(function () {
             for (var i = 0; i < tmp.length; i++) {
-                tmp[i].htmlele.style.backgroundColor = party.difficulty.frtColor; //retournement de la carte
+                var test = tmp[i].htmlele.childNodes[0];
+                test.style.opacity = "0";
             }
         }, 500);
     }

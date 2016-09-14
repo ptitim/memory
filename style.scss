@@ -1,11 +1,18 @@
 $cardHeight: 20vmax;
-$carWidth: $cardHeight /1.2;
+$cardWidth: $cardHeight /1.2;
 
 
 *{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+img{
+  object-fit: cover;
+  pointer-events: none;
+  height: $cardHeight;
+  width: $cardWidth;
 }
 
 .plateau{
@@ -21,11 +28,11 @@ $carWidth: $cardHeight /1.2;
 .easyCard{
   @extend .card;
   height: $cardHeight;
-  width: $carWidth;
+  width: $cardWidth;
 }
 
 .hardCard{
     @extend .card;
     height: $cardHeight/1.5;
-    width: $carWidth/1.5;
+    width: $cardWidth/1.5;
 }

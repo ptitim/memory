@@ -3,6 +3,12 @@
   padding: 0;
   box-sizing: border-box; }
 
+img {
+  object-fit: cover;
+  pointer-events: none;
+  height: 20vmax;
+  width: 16.66667vmax; }
+
 .plateau {
   display: flex;
   flex-wrap: wrap; }
