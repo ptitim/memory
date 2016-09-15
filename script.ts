@@ -10,8 +10,10 @@ var clicktimeOut:any;
 var time:number;
 var timer:any;
 var htmlTimer: HTMLElement;
+var button:HTMLElement;
+var firstPlay:boolean = true;
 
-const tabMotif:Array<string> = ["data/1.png",
+var tabMotif:Array<string> = ["data/1.png",
                                 "data/2.png",
                                 "data/3.png",
                                 "data/4.png",
@@ -29,7 +31,7 @@ const tabMotif:Array<string> = ["data/1.png",
                                 "data/16.png",
                                 "data/17.png",
                                 "data/18.png",
-                                ]
+                              ];
 const TIMEOFCLICK: number = 4000;//temps pour retourner la deuximee carte
 
 class Card{
@@ -48,7 +50,13 @@ class Game{
     listOfCard: Array<Card>;
 
     constructor(public difficulty: any){
-      var plateau: any = document.getElementsByClassName('plateau')[0];
+      var plateau: any = document.createElement('div');
+      plateau.className = "plateau";
+      var body:HTMLElement = document.getElementsByTagName('body')[0];
+      button = buttonMenu();
+      body.appendChild(button);
+      body.appendChild(plateau);
+
       this.difficulty = difficulty;
       this.numberOfCard = difficulty.numberOfCard;
       this.listOfCard = [];
@@ -80,7 +88,6 @@ function startGame(difficulty: any){
     time = difficulty.timer;
 
     htmlTimer.innerText = time.toString();
-    timer = setInterval(countdown, 1000);
 
     return party;
 }
@@ -121,8 +128,10 @@ function generateTabColor(numberOfCard: number){
   var tab = ['0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'];
   var numberOfColor = numberOfCard/2;
   var returnTab:Array<any> = [];
-  var tabImgtemp = tabMotif;
+  var tabImgtemp:Array<string> = [];
+  tabImgtemp = tabMotif;
 
+  console.log(tabImgtemp);
   for(var i = 0 ; i < numberOfColor; i++){
       var str:Array<any> = [];
       str.push('#');
@@ -145,10 +154,21 @@ function createhtmlTimer(){
     var div = document.createElement('div');
     div.id = IDTIMER;
     return div;
+}
 
+function buttonMenu(){
+  var input = document.createElement('input');
+  input.value = "Menu";
+  input.addEventListener("click", reset);
+  input.id = "buttonMenu";
+  return input;
 }
 
 function play(event:any){
+    if(firstPlay){
+      firstPlay = false;
+      timer = setInterval(countdown, 1000);
+    }
     event.preventDefault();
     if(cardPlayed.length < 2){
         var element = event.target;
@@ -191,7 +211,6 @@ function timeout(){
 }
 
 function verifCard(){
-    console.log("card 1:",cardPlayed[0].color," card 2: ", cardPlayed[1].color, " length :" ,cardPlayed.length);
     if(cardPlayed[0].color == cardPlayed[1].color){
         clearTimeout(clicktimeOut);
     }else{
@@ -203,23 +222,49 @@ function verifCard(){
 }
 
 function verifParty(){
-    var tab = party.listOfCard;
+    var tab:Array<Card> = party.listOfCard;
+    var compteur:number = 0;
     for(var i = 0; i < tab.length; i++){
-      if(tab[i].value || time == 0){
-          reset();
-          break;
+      if(tab[i].value){
+        compteur++;
       }
+    }
+    if(compteur == tab.length || time == 0){
+        window.clearInterval(timer);
+        setTimeout(reset,1200);
     }
 }
 
 function reset(){
-    window.clearInterval(timer);
     var plateau = party.listOfCard[0].htmlele.parentElement;
     var body = plateau.parentElement;
     body.removeChild(plateau);
-
+    body.removeChild(button);
+    window.clearInterval(timer);
+    firstPlay = true;
     var choix:any = document.getElementsByClassName('choixdif')[0];
     choix.style.display = 'flex';
+    party = null;
+
+    tabMotif = ["data/1.png",
+                "data/2.png",
+                "data/3.png",
+                "data/4.png",
+                "data/5.png",
+                "data/6.png",
+                "data/7.png",
+                "data/8.png",
+                "data/9.png",
+                "data/10.png",
+                "data/11.png",
+                "data/12.png",
+                "data/13.png",
+                "data/14.png",
+                "data/15.png",
+                "data/16.png",
+                "data/17.png",
+                "data/18.png",
+              ];
 }
 
 function countdown(){

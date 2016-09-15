@@ -1,6 +1,6 @@
 $cardHeight: 20vmax;
 $cardWidth: $cardHeight /1.2;
-
+$bodyColor: #DDD;
 
 *{
   margin: 0;
@@ -14,7 +14,7 @@ body{
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #ddd;
+  background-color: $bodyColor;
 }
 
 .choixdif{
@@ -55,6 +55,15 @@ img{
   &focus{
     outline: none;
   }
+}
+#buttonMenu{
+    position: absolute;
+    top: 1vh;
+    left: 2vw;
+    height: 5vmin;
+    width: 7vmax;
+    background-color: $bodyColor;
+    color: black;
 }
 
 #timer{

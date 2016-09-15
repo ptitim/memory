@@ -9,6 +9,8 @@ var clicktimeOut;
 var time;
 var timer;
 var htmlTimer;
+var button;
+var firstPlay = true;
 var tabMotif = ["data/1.png",
     "data/2.png",
     "data/3.png",
@@ -47,7 +49,12 @@ var Card = (function () {
 var Game = (function () {
     function Game(difficulty) {
         this.difficulty = difficulty;
-        var plateau = document.getElementsByClassName('plateau')[0];
+        var plateau = document.createElement('div');
+        plateau.className = "plateau";
+        var body = document.getElementsByTagName('body')[0];
+        button = buttonMenu();
+        body.appendChild(button);
+        body.appendChild(plateau);
         this.difficulty = difficulty;
         this.numberOfCard = difficulty.numberOfCard;
         this.listOfCard = [];
@@ -74,7 +81,6 @@ function startGame(difficulty) {
     choix.style.display = 'none';
     time = difficulty.timer;
     htmlTimer.innerText = time.toString();
-    timer = setInterval(countdown, 1000);
     return party;
 }
 function createHTMLCard(dif, backColor, srcImages, id) {
@@ -113,7 +119,9 @@ function generateTabColor(numberOfCard) {
     var tab = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'];
     var numberOfColor = numberOfCard / 2;
     var returnTab = [];
-    var tabImgtemp = tabMotif;
+    var tabImgtemp = [];
+    tabImgtemp = tabMotif;
+    console.log(tabImgtemp);
     for (var i = 0; i < numberOfColor; i++) {
         var str = [];
         str.push('#');
@@ -134,7 +142,18 @@ function createhtmlTimer() {
     div.id = IDTIMER;
     return div;
 }
+function buttonMenu() {
+    var input = document.createElement('input');
+    input.value = "Menu";
+    input.addEventListener("click", reset);
+    input.id = "buttonMenu";
+    return input;
+}
 function play(event) {
+    if (firstPlay) {
+        firstPlay = false;
+        timer = setInterval(countdown, 1000);
+    }
     event.preventDefault();
     if (cardPlayed.length < 2) {
         var element = event.target;
@@ -171,7 +190,6 @@ function timeout() {
     cardPlayed = [];
 }
 function verifCard() {
-    console.log("card 1:", cardPlayed[0].color, " card 2: ", cardPlayed[1].color, " length :", cardPlayed.length);
     if (cardPlayed[0].color == cardPlayed[1].color) {
         clearTimeout(clicktimeOut);
     }
@@ -184,20 +202,46 @@ function verifCard() {
 }
 function verifParty() {
     var tab = party.listOfCard;
+    var compteur = 0;
     for (var i = 0; i < tab.length; i++) {
-        if (tab[i].value || time == 0) {
-            reset();
-            break;
+        if (tab[i].value) {
+            compteur++;
         }
+    }
+    if (compteur == tab.length || time == 0) {
+        window.clearInterval(timer);
+        setTimeout(reset, 1200);
     }
 }
 function reset() {
-    window.clearInterval(timer);
     var plateau = party.listOfCard[0].htmlele.parentElement;
     var body = plateau.parentElement;
     body.removeChild(plateau);
+    body.removeChild(button);
+    window.clearInterval(timer);
+    firstPlay = true;
     var choix = document.getElementsByClassName('choixdif')[0];
     choix.style.display = 'flex';
+    party = null;
+    tabMotif = ["data/1.png",
+        "data/2.png",
+        "data/3.png",
+        "data/4.png",
+        "data/5.png",
+        "data/6.png",
+        "data/7.png",
+        "data/8.png",
+        "data/9.png",
+        "data/10.png",
+        "data/11.png",
+        "data/12.png",
+        "data/13.png",
+        "data/14.png",
+        "data/15.png",
+        "data/16.png",
+        "data/17.png",
+        "data/18.png",
+    ];
 }
 function countdown() {
     time--;

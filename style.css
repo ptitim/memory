@@ -8,7 +8,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #ddd; }
+  background-color: #DDD; }
 
 .choixdif {
   display: flex;
@@ -42,6 +42,15 @@ img {
   filter: grayscale(100%); }
   imgfocus {
     outline: none; }
+
+#buttonMenu {
+  position: absolute;
+  top: 1vh;
+  left: 2vw;
+  height: 5vmin;
+  width: 7vmax;
+  background-color: #DDD;
+  color: black; }
 
 #timer {
   text-align: center;
