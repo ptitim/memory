@@ -1,25 +1,68 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box; }
+  -moz-user-select: none; }
+
+body {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ddd; }
+
+.choixdif {
+  display: flex;
+  flex-direction: column; }
+
+input {
+  border: none;
+  margin: 2vmax;
+  height: 8vh;
+  width: 15vw;
+  font-family: sans-serif;
+  font-weight: bolder;
+  font-size: 150%;
+  border-radius: 3%; }
+
+#easy {
+  background-color: #4468c3; }
+
+#normal {
+  background-color: #e8a22a; }
+
+#hard {
+  background-color: #e6dd1c; }
+
+#harder {
+  background-color: #a3a3a3; }
 
 img {
-  object-fit: cover;
+  object-fit: contain;
   pointer-events: none;
-  height: 20vmax;
-  width: 16.66667vmax; }
+  filter: grayscale(100%); }
+  imgfocus {
+    outline: none; }
+
+#timer {
+  text-align: center;
+  color: #666;
+  width: 100vw;
+  font-size: 3em; }
 
 .plateau {
   display: flex;
   flex-wrap: wrap; }
 
-.card, .easyCard, .hardCard {
-  border: 2px inset grey;
-  margin: 2vmin; }
+.card {
+  border: 2px solid grey;
+  margin: 2vmin;
+  border-radius: 1%;
+  overflow: hidden;
+  object-fit: contain; }
 
 .easyCard {
   height: 20vmax;
-  width: 16.66667vmax; }
+  width: 13.66667vmax; }
 
 .hardCard {
   height: 13.33333vmax;
