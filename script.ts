@@ -14,23 +14,23 @@ var button:HTMLElement;
 var firstPlay:boolean = true;
 
 var tabMotif:Array<string> = ["data/1.png",
-                                "data/2.png",
-                                "data/3.png",
-                                "data/4.png",
-                                "data/5.png",
-                                "data/6.png",
-                                "data/7.png",
-                                "data/8.png",
-                                "data/9.png",
-                                "data/10.png",
-                                "data/11.png",
-                                "data/12.png",
-                                "data/13.png",
-                                "data/14.png",
-                                "data/15.png",
-                                "data/16.png",
-                                "data/17.png",
-                                "data/18.png",
+                              "data/2.png",
+                              "data/3.png",
+                              "data/4.png",
+                              "data/5.png",
+                              "data/6.png",
+                              "data/7.png",
+                              "data/8.png",
+                              "data/9.png",
+                              "data/10.png",
+                              "data/11.png",
+                              "data/12.png",
+                              "data/13.png",
+                              "data/14.png",
+                              "data/15.png",
+                              "data/16.png",
+                              "data/17.png",
+                              "data/18.png",
                               ];
 const TIMEOFCLICK: number = 4000;//temps pour retourner la deuximee carte
 
@@ -248,7 +248,7 @@ function reset(){
     var choix:any = document.getElementsByClassName('choixdif')[0];
     choix.style.display = 'flex';
     party = null;
-
+    cardPlayed = [];
     tabMotif = ["data/1.png",
                 "data/2.png",
                 "data/3.png",
@@ -285,11 +285,20 @@ function preload(){
         xhr.open("GET", tabMotif[i], true);
         xhr.send(null);
     }
-    xhr.open(EASY.frtColor);
-    xhr.open(NORMAL.frtColor);
-    xhr.open(HARD.frtColor);
-    xhr.open(HARDER.frtColor);
+    xhr.open("GET",EASY.frtColor);
+    console.log("EASY");
+    xhr.open("GET",NORMAL.frtColor);
+    console.log("NORMAL");
+    xhr.open("GET",HARD.frtColor);
+    console.log("HARD");
+    xhr.open("GET",HARDER.frtColor);
+    console.log("HARDER");
 
+    xhr.onreadystatechange = function(){
+      if(xhr.readystate == 4){
+          alert("All data received");
+      }
+    }
 }
 
 function rand(a:number){

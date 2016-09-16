@@ -227,6 +227,7 @@ function reset() {
     var choix = document.getElementsByClassName('choixdif')[0];
     choix.style.display = 'flex';
     party = null;
+    cardPlayed = [];
     tabMotif = ["data/1.png",
         "data/2.png",
         "data/3.png",
@@ -260,10 +261,19 @@ function preload() {
         xhr.open("GET", tabMotif[i], true);
         xhr.send(null);
     }
-    xhr.open(EASY.frtColor);
-    xhr.open(NORMAL.frtColor);
-    xhr.open(HARD.frtColor);
-    xhr.open(HARDER.frtColor);
+    xhr.open("GET", EASY.frtColor);
+    console.log("EASY");
+    xhr.open("GET", NORMAL.frtColor);
+    console.log("NORMAL");
+    xhr.open("GET", HARD.frtColor);
+    console.log("HARD");
+    xhr.open("GET", HARDER.frtColor);
+    console.log("HARDER");
+    xhr.onreadystatechange = function () {
+        if (xhr.readystate == 4) {
+            alert("All data received");
+        }
+    };
 }
 function rand(a) {
     return Math.floor(Math.random() * a);
