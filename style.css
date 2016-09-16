@@ -9,16 +9,16 @@
     width: 50vmin; }
 
   #buttonMenu {
-    height: 5vmax;
-    width: 7vmin; } }
+    height: 6vmax;
+    width: 20vmin; } }
 @media (orientation: landscape) {
   input {
     height: 15vmin;
     width: 50vmax; }
 
   #buttonMenu {
-    height: 5vmin;
-    width: 7vmax; } }
+    height: 6vmin;
+    width: 20vmax; } }
 body {
   height: 100vh;
   display: flex;
