@@ -6,11 +6,19 @@
 @media (orientation: portrait) {
   input {
     height: 15vmax;
-    width: 50vmin; } }
+    width: 50vmin; }
+
+  #buttonMenu {
+    height: 5vmax;
+    width: 7vmin; } }
 @media (orientation: landscape) {
   input {
     height: 15vmin;
-    width: 50vmax; } }
+    width: 50vmax; }
+
+  #buttonMenu {
+    height: 5vmin;
+    width: 7vmax; } }
 body {
   height: 100vh;
   display: flex;
@@ -46,15 +54,11 @@ img {
   object-fit: contain;
   pointer-events: none;
   filter: grayscale(100%); }
-  imgfocus {
-    outline: none; }
 
 #buttonMenu {
   position: absolute;
   top: 1vh;
   left: 2vw;
-  height: 5vmin;
-  width: 7vmax;
   background-color: #DDD;
   color: black; }
 

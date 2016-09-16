@@ -1,7 +1,7 @@
 var EASY = { numberOfCard: 6, frtColor: "url('1.png')", timer: 20, dif: "easy" };
 var NORMAL = { numberOfCard: 10, frtColor: "url('7.png')", timer: 25, dif: "normal" };
 var HARD = { numberOfCard: 14, frtColor: "url('9.png')", timer: 30, dif: "hard" };
-var HARDER = { numberOfCard: 20, frtColor: "url('8.png')", timer: 40, dif: "harder" };
+var HARDER = { numberOfCard: 20, frtColor: "url('8.png')", timer: 30, dif: "harder" };
 var IDTIMER = "timer";
 var party;
 var cardPlayed = [];

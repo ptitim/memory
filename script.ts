@@ -1,7 +1,7 @@
 const EASY: any = {   numberOfCard: 6,  frtColor: "url('1.png')",timer: 20,   dif:"easy"  };
 const NORMAL: any = { numberOfCard: 10, frtColor: "url('7.png')",timer: 25,   dif:"normal"};
 const HARD: any = {   numberOfCard: 14, frtColor: "url('9.png')",timer: 30,   dif:"hard"  };
-const HARDER: any = { numberOfCard: 20, frtColor: "url('8.png')",timer: 40,   dif:"harder" };
+const HARDER: any = { numberOfCard: 20, frtColor: "url('8.png')",timer: 30,   dif:"harder" };
 const IDTIMER: string = "timer";
 
 var party: any;
