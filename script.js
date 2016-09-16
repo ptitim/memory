@@ -252,6 +252,15 @@ function countdown() {
     htmlTimer.innerText = time.toString();
     verifParty();
 }
+function preload() {
+    var xhr = null;
+    xhr = new XMLHttpRequest();
+    for (var i = 0; i < tabMotif.length; i++) {
+        console.log(i, " ", tabMotif[i]);
+        xhr.open("GET", tabMotif[i], true);
+        xhr.send(null);
+    }
+}
 function rand(a) {
     return Math.floor(Math.random() * a);
 }
