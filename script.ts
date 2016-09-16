@@ -224,7 +224,7 @@ function verifCard(){
     verifParty();
 }
 
-function verifParty(){
+function verifParty(){//verify the state of party, reset if all cards are played or time is over
     var tab:Array<Card> = party.listOfCard;
     var compteur:number = 0;
     for(var i = 0; i < tab.length; i++){
@@ -245,8 +245,13 @@ function reset(){
     body.removeChild(button);
     window.clearInterval(timer);
     firstPlay = true;
-    var choix:any = document.getElementsByClassName('choixdif')[0];
-    choix.style.display = 'flex';
+
+    // TODO: ajoutez ecarn de fin 
+
+    setTimeout(function(){
+      var choix:any = document.getElementsByClassName('choixdif')[0];
+      choix.style.display = 'flex';
+    }, 2000);
     party = null;
     cardPlayed = [];
     tabMotif = ["data/1.png",
@@ -276,29 +281,10 @@ function countdown(){
     verifParty();
 }
 
-function preload(){
-    var xhr: any = null;
-    xhr = new XMLHttpRequest();
+function endingParty(){
 
-    for(var i = 0; i < tabMotif.length; i++){
-      console.log(i, " ", tabMotif[i]);
-        xhr.open("GET", tabMotif[i], true);
-        xhr.send(null);
-    }
-    xhr.open("GET",EASY.frtColor);
-    console.log("EASY");
-    xhr.open("GET",NORMAL.frtColor);
-    console.log("NORMAL");
-    xhr.open("GET",HARD.frtColor);
-    console.log("HARD");
-    xhr.open("GET",HARDER.frtColor);
-    console.log("HARDER");
 
-    xhr.onreadystatechange = function(){
-      if(xhr.readystate == 4){
-          alert("All data received");
-      }
-    }
+
 }
 
 function rand(a:number){
