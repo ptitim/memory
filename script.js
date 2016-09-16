@@ -162,9 +162,12 @@ function play(event) {
         card.value = true;
         card.htmlele.removeEventListener("click", play);
         cardPlayed.push(card);
-        card.htmlele.style.background = "none";
-        card.image.style.opacity = "1";
-        card.htmlele.style.backgroundColor = card.color;
+        setTimeout(function () {
+            card.htmlele.style.background = "none";
+            card.image.style.opacity = "1";
+            card.htmlele.style.backgroundColor = card.color;
+        }, 150);
+        card.htmlele.style.transform = "rotate3d(0,0,0,0deg)";
         if (cardPlayed.length == 1) {
             clicktimeOut = setTimeout(timeout, TIMEOFCLICK);
         }
@@ -184,6 +187,7 @@ function timeout() {
             for (var i = 0; i < temp.length; i++) {
                 temp[i].htmlele.style.backgroundImage = party.difficulty.frtColor;
                 temp[i].image.style.opacity = "0";
+                temp[i].htmlele.style.transform = "rotate3d(0,180,0,180deg)";
             }
         }, 500);
     }
