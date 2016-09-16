@@ -260,6 +260,10 @@ function preload() {
         xhr.open("GET", tabMotif[i], true);
         xhr.send(null);
     }
+    xhr.open(EASY.frtColor);
+    xhr.open(NORMAL.frtColor);
+    xhr.open(HARD.frtColor);
+    xhr.open(HARDER.frtColor);
 }
 function rand(a) {
     return Math.floor(Math.random() * a);
